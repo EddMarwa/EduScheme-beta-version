@@ -87,3 +87,28 @@ schemeForm.addEventListener("submit", function (e) {
   e.preventDefault();
   alert("Scheme saved! (Further processing can be added here)");
 });
+
+// Handle Settings form submit
+const settingsForm = document.getElementById("settings-form");
+settingsForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  alert("Settings updated successfully.");
+});
+
+// Handle logout button
+function handleLogout() {
+  alert("Logged out. Redirect to login or clear session here.");
+  // Example: window.location.href = "login.html";
+}
+// Save settings form
+document.getElementById("settings-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  alert("Settings updated successfully.");
+});
+
+// Simulate logout action
+function handleLogout() {
+  alert("Logged out successfully.");
+  // Redirect or clear session logic goes here
+  // e.g., window.location.href = "login.html";
+}

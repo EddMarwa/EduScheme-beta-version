@@ -135,11 +135,37 @@
         </form>
       </section>
 
-      <!-- Settings Panel Placeholder -->
-      <section id="settings" class="panel">
-        <h2>Settings</h2>
-        <p>Coming soon...</p>
-      </section>
+      <!-- Settings Panel -->
+    <section id="settings" class="panel">
+    <h2>Settings</h2>
+    <form id="settings-form" class="settings-form">
+        <div class="form-group">
+        <label for="user-name-input">Name</label>
+        <input type="text" id="user-name-input" name="name" placeholder="Enter your name" required />
+        </div>
+
+        <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+        </div>
+
+        <div class="form-group">
+        <label for="role">Role</label>
+        <input type="text" id="role" name="role" placeholder="e.g., Teacher" />
+        </div>
+
+        <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Update password" />
+        </div>
+
+        <div class="settings-actions">
+        <button type="submit" class="action-btn">Save Settings</button>
+        <button type="button" class="action-btn" onclick="handleLogout()">Log Out</button>
+        </div>
+    </form>
+    </section>
+
     </main>
   </div>
 
