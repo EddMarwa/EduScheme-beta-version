@@ -184,9 +184,47 @@ body[data-theme="dark"] .main-panel {
   background: #f3f4f6;
 }
 
+/* ---------- Form Styling (Create Scheme) ---------- */
+form {
+  max-width: 600px;
+  margin-top: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.form-group select:invalid {
+  color: #9ca3af;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
 /* ---------- Dark Mode Overrides ---------- */
 body[data-theme="dark"] .card,
-body[data-theme="dark"] .transaction-table {
+body[data-theme="dark"] .transaction-table,
+body[data-theme="dark"] form,
+body[data-theme="dark"] input,
+body[data-theme="dark"] select {
   background-color: #374151;
   color: var(--text-light);
 }
@@ -194,7 +232,8 @@ body[data-theme="dark"] .transaction-table {
 body[data-theme="dark"] .card h3,
 body[data-theme="dark"] .card p,
 body[data-theme="dark"] .transaction-table td,
-body[data-theme="dark"] .transaction-table th {
+body[data-theme="dark"] .transaction-table th,
+body[data-theme="dark"] label {
   color: var(--text-light);
 }
 
