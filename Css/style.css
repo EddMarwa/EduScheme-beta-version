@@ -173,3 +173,34 @@ body[data-theme="dark"] .main-panel {
 body[data-theme="dark"] .transaction-table tr:hover {
   background: #374151;
 }
+
+/* Dark mode overrides */
+body[data-theme="dark"] .card,
+body[data-theme="dark"] .transaction-table {
+  background-color: #374151;
+  color: var(--text-light);
+}
+
+body[data-theme="dark"] .card h3,
+body[data-theme="dark"] .card p,
+body[data-theme="dark"] .transaction-table td,
+body[data-theme="dark"] .transaction-table th {
+  color: var(--text-light);
+}
+
+body[data-theme="dark"] .main-panel {
+  background-color: var(--bg-dark);
+}
+
+body[data-theme="dark"] .action-btn {
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
+
+body[data-theme="dark"] .sidebar {
+  background-color: #1e40af; /* darker blue for sidebar */
+}
+
+body[data-theme="dark"] .theme-switcher label {
+  color: var(--text-light);
+}
