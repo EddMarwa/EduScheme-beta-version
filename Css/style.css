@@ -1,6 +1,11 @@
-/* style.css */
+/* -------------------------
+   EduScheme CSS File
+   Theme Colors: Blue, Green, Grey, White
+   Layout: Sidebar Navigation, Responsive Panels
+   ------------------------- */
 
 :root {
+  /* Core Theme Colors */
   --color-blue: #2563eb;
   --color-green: #10b981;
   --color-grey: #6b7280;
@@ -11,6 +16,7 @@
   --text-light: #f9fafb;
 }
 
+/* ---------- Base Layout ---------- */
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -29,6 +35,7 @@ body[data-theme="dark"] {
   height: 100vh;
 }
 
+/* ---------- Sidebar Navigation ---------- */
 .sidebar {
   width: 240px;
   background: var(--color-blue);
@@ -63,6 +70,7 @@ body[data-theme="dark"] {
   background: var(--color-green);
 }
 
+/* ---------- Theme Switcher Dropdown ---------- */
 .theme-switcher {
   margin-top: auto;
   padding-top: 2rem;
@@ -75,6 +83,7 @@ body[data-theme="dark"] {
   font-size: 0.9rem;
 }
 
+/* ---------- Main Panel Area ---------- */
 .main-panel {
   flex: 1;
   padding: 2rem;
@@ -87,6 +96,7 @@ body[data-theme="dark"] .main-panel {
   background: var(--bg-dark);
 }
 
+/* Panel visibility toggle */
 .panel {
   display: none;
   animation: fadeIn 0.3s ease-in-out;
@@ -96,6 +106,7 @@ body[data-theme="dark"] .main-panel {
   display: block;
 }
 
+/* Fade animation for panel switch */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -107,6 +118,7 @@ body[data-theme="dark"] .main-panel {
   }
 }
 
+/* ---------- Card Layout ---------- */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -126,6 +138,7 @@ body[data-theme="dark"] .main-panel {
   transform: translateY(-5px);
 }
 
+/* ---------- Buttons ---------- */
 .action-btn {
   background: var(--color-green);
   border: none;
@@ -141,6 +154,7 @@ body[data-theme="dark"] .main-panel {
   background: #059669;
 }
 
+/* ---------- Wallet Section ---------- */
 .wallet-summary {
   margin-bottom: 1rem;
 }
@@ -170,11 +184,7 @@ body[data-theme="dark"] .main-panel {
   background: #f3f4f6;
 }
 
-body[data-theme="dark"] .transaction-table tr:hover {
-  background: #374151;
-}
-
-/* Dark mode overrides */
+/* ---------- Dark Mode Overrides ---------- */
 body[data-theme="dark"] .card,
 body[data-theme="dark"] .transaction-table {
   background-color: #374151;
@@ -198,9 +208,13 @@ body[data-theme="dark"] .action-btn {
 }
 
 body[data-theme="dark"] .sidebar {
-  background-color: #1e40af; /* darker blue for sidebar */
+  background-color: #1e40af;
 }
 
 body[data-theme="dark"] .theme-switcher label {
   color: var(--text-light);
+}
+
+body[data-theme="dark"] .transaction-table tr:hover {
+  background: #374151;
 }
