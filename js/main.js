@@ -1,20 +1,17 @@
-// main.js
-
-// Panel switching
-const tabs = document.querySelectorAll(".sidebar nav li");
-const panels = document.querySelectorAll(".panel");
-
-tabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    tabs.forEach(t => t.classList.remove("active"));
-    panels.forEach(p => p.classList.remove("active"));
-    tab.classList.add("active");
-    document.getElementById(tab.dataset.panel).classList.add("active");
+// ========== Panel Navigation ==========
+function switchPanel(panelId) {
+  document.querySelectorAll(".panel").forEach(panel => {
+    panel.classList.remove("active");
   });
+  document.getElementById(panelId).classList.add("active");
+}
+
+// ========== Theme Toggle ==========
+const themeSelect = document.getElementById("theme-select");
+themeSelect.addEventListener("change", () => {
+  applyTheme(themeSelect.value);
 });
 
-// Theme toggling
-const themeSelect = document.getElementById("theme-select");
 function applyTheme(theme) {
   if (theme === "system") {
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -23,92 +20,63 @@ function applyTheme(theme) {
     document.body.setAttribute("data-theme", theme);
   }
 }
-themeSelect.addEventListener("change", (e) => applyTheme(e.target.value));
-window.addEventListener("DOMContentLoaded", () => {
-  applyTheme(themeSelect.value);
-  populateYears();
-});
 
-// Populate Academic Year dropdown
-function populateYears() {
-  const yearSelect = document.getElementById("year");
-  const currentYear = new Date().getFullYear();
-  for (let i = currentYear; i >= currentYear - 10; i--) {
-    const opt = document.createElement("option");
-    opt.value = i;
-    opt.textContent = i;
-    yearSelect.appendChild(opt);
-  }
+// ========== Populate Year Dropdown ==========
+const yearDropdown = document.getElementById("year");
+const currentYear = new Date().getFullYear();
+for (let i = 0; i < 10; i++) {
+  const option = document.createElement("option");
+  option.value = currentYear - i;
+  option.textContent = currentYear - i;
+  yearDropdown.appendChild(option);
 }
 
-// Conditional class/form fields based on school level
-const schoolLevel = document.getElementById("school-level");
-const levelOptions = document.getElementById("level-options");
+// ========== Handle School Level Selection ==========
+document.getElementById("school-level").addEventListener("change", function () {
+  const levelContainer = document.getElementById("level-container");
+  levelContainer.innerHTML = "";
+  const selectedLevel = this.value;
 
-schoolLevel.addEventListener("change", function () {
-  levelOptions.innerHTML = "";
-  levelOptions.style.display = "block";
+  const select = document.createElement("select");
+  select.classList.add("form-select");
 
-  let label = document.createElement("label");
-  let select = document.createElement("select");
-  select.name = "levelClass";
-  select.required = true;
-
-  if (this.value === "primary") {
-    label.textContent = "Select Class";
-    select.id = "primary-class";
+  if (selectedLevel === "primary") {
+    select.id = "class";
     for (let i = 1; i <= 8; i++) {
-      let opt = document.createElement("option");
-      opt.value = `class${i}`;
-      opt.textContent = `Class ${i}`;
-      select.appendChild(opt);
+      const option = document.createElement("option");
+      option.value = `Class ${i}`;
+      option.textContent = `Class ${i}`;
+      select.appendChild(option);
     }
-  } else if (this.value === "secondary") {
-    label.textContent = "Select Form";
-    select.id = "secondary-form";
-    for (let i = 1; i <= 4; i++) {
-      let opt = document.createElement("option");
-      opt.value = `form${i}`;
-      opt.textContent = `Form ${i}`;
-      select.appendChild(opt);
-    }
-  } else {
-    levelOptions.style.display = "none";
-    return;
+  } else if (selectedLevel === "secondary") {
+    select.id = "form";
+    ["Form 1", "Form 2", "Form 3", "Form 4"].forEach((f) => {
+      const option = document.createElement("option");
+      option.value = f;
+      option.textContent = f;
+      select.appendChild(option);
+    });
   }
-
-  levelOptions.appendChild(label);
-  levelOptions.appendChild(select);
+  levelContainer.appendChild(select);
 });
 
-// Handle Create Scheme form submit
-const schemeForm = document.getElementById("scheme-form");
-schemeForm.addEventListener("submit", function (e) {
+// ========== Form Handlers ==========
+document.getElementById("scheme-form").addEventListener("submit", function (e) {
   e.preventDefault();
-  alert("Scheme saved! (Further processing can be added here)");
+  alert("Scheme saved!");
 });
 
-// Handle Settings form submit
-const settingsForm = document.getElementById("settings-form");
-settingsForm.addEventListener("submit", function (e) {
+document.getElementById("lesson-plan-form").addEventListener("submit", function (e) {
   e.preventDefault();
-  alert("Settings updated successfully.");
+  alert("Lesson plan saved!");
 });
 
-// Handle logout button
-function handleLogout() {
-  alert("Logged out. Redirect to login or clear session here.");
-  // Example: window.location.href = "login.html";
-}
-// Save settings form
 document.getElementById("settings-form").addEventListener("submit", function (e) {
   e.preventDefault();
   alert("Settings updated successfully.");
 });
 
-// Simulate logout action
 function handleLogout() {
-  alert("Logged out successfully.");
-  // Redirect or clear session logic goes here
-  // e.g., window.location.href = "login.html";
+  alert("Logged out. Redirect to login or clear session here.");
+  // window.location.href = "login.html";
 }

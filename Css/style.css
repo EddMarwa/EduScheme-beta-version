@@ -5,24 +5,22 @@
    ------------------------- */
 
 :root {
-  /* Core Theme Colors */
-  --color-blue: #2563eb;
+  --color-blue: #3b82f6;
   --color-green: #10b981;
-  --color-grey: #6b7280;
   --color-white: #ffffff;
+  --color-grey: #6b7280;
   --bg-light: #f9fafb;
   --bg-dark: #1f2937;
   --text-dark: #111827;
   --text-light: #f9fafb;
 }
 
-/* ---------- Base Layout ---------- */
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
   background-color: var(--bg-light);
   color: var(--text-dark);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body[data-theme="dark"] {
@@ -33,89 +31,69 @@ body[data-theme="dark"] {
 .app-container {
   display: flex;
   height: 100vh;
+  overflow: hidden;
 }
-
 /* ---------- Sidebar Navigation ---------- */
 .sidebar {
-  width: 240px;
-  background: var(--color-blue);
+  width: 220px;
+  background-color: var(--color-blue);
   color: var(--color-white);
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
 }
 
-.logo {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
+.sidebar h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.sidebar nav ul {
+.sidebar ul {
   list-style: none;
   padding: 0;
 }
 
-.sidebar nav li {
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
+.sidebar li {
   cursor: pointer;
-  transition: background 0.3s;
+  padding: 0.6rem;
+  margin-bottom: 0.4rem;
+  border-radius: 4px;
+  transition: background 0.2s ease;
 }
 
-.sidebar nav li:hover,
-.sidebar nav li.active {
-  background: var(--color-green);
+.sidebar li:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* ---------- Theme Switcher Dropdown ---------- */
 .theme-switcher {
-  margin-top: auto;
-  padding-top: 2rem;
-  color: var(--color-white);
+  margin-top: 1rem;
 }
 
 .theme-switcher label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
   font-size: 0.9rem;
 }
 
-/* ---------- Main Panel Area ---------- */
-.main-panel {
+.main-content {
   flex: 1;
-  padding: 2rem;
   overflow-y: auto;
-  background: var(--bg-light);
-  transition: background 0.3s;
+  padding: 2rem;
 }
 
-body[data-theme="dark"] .main-panel {
-  background: var(--bg-dark);
-}
-
-/* Panel visibility toggle */
 .panel {
   display: none;
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.4s ease-in-out;
 }
 
 .panel.active {
   display: block;
 }
 
-/* Fade animation for panel switch */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ---------- Card Layout ---------- */
@@ -131,13 +109,12 @@ body[data-theme="dark"] .main-panel {
   padding: 1rem;
   border-radius: 0.75rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s;
+  transition: transform 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-5px);
 }
-
 /* ---------- Buttons ---------- */
 .action-btn {
   background: var(--color-green);
@@ -154,106 +131,72 @@ body[data-theme="dark"] .main-panel {
   background: #059669;
 }
 
-/* ---------- Wallet Section ---------- */
-.wallet-summary {
-  margin-bottom: 1rem;
-}
-
 .transaction-table {
   width: 100%;
   border-collapse: collapse;
-  background: var(--color-white);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  border-radius: 0.5rem;
-  overflow: hidden;
-}
-
-.transaction-table th,
-.transaction-table td {
-  padding: 0.75rem;
-  text-align: left;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.transaction-table th {
-  background: var(--color-grey);
-  color: var(--color-white);
-}
-
-.transaction-table tr:hover {
-  background: #f3f4f6;
-}
-
-/* ---------- Form Styling (Create Scheme) ---------- */
-form {
-  max-width: 600px;
   margin-top: 1rem;
 }
 
+.transaction-table th, .transaction-table td {
+  border: 1px solid #d1d5db;
+  padding: 0.5rem;
+  text-align: left;
+}
+
 .form-group {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.2rem;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
   font-weight: 600;
 }
 
 .form-group input,
-.form-group select {
+.form-group select,
+.form-group textarea {
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
+  padding: 0.6rem;
   font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  box-sizing: border-box;
 }
 
-.form-group select:invalid {
-  color: #9ca3af;
-}
-
-.form-actions {
+.settings-actions {
   display: flex;
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
-/* ---------- Dark Mode Overrides ---------- */
-body[data-theme="dark"] .card,
-body[data-theme="dark"] .transaction-table,
-body[data-theme="dark"] form,
-body[data-theme="dark"] input,
-body[data-theme="dark"] select {
-  background-color: #374151;
-  color: var(--text-light);
-}
-
-body[data-theme="dark"] .card h3,
-body[data-theme="dark"] .card p,
-body[data-theme="dark"] .transaction-table td,
-body[data-theme="dark"] .transaction-table th,
-body[data-theme="dark"] label {
-  color: var(--text-light);
-}
-
-body[data-theme="dark"] .main-panel {
-  background-color: var(--bg-dark);
-}
-
-body[data-theme="dark"] .action-btn {
+.action-btn {
   background-color: var(--color-green);
   color: var(--color-white);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-btn:hover {
+  background-color: #059669;
+  transform: scale(1.02);
+}
+
+/* Dark mode overrides */
+body[data-theme="dark"] .card,
+body[data-theme="dark"] .transaction-table,
+body[data-theme="dark"] input,
+body[data-theme="dark"] select,
+body[data-theme="dark"] textarea {
+  background-color: #374151;
+  color: var(--text-light);
+  border-color: #4b5563;
 }
 
 body[data-theme="dark"] .sidebar {
   background-color: #1e40af;
-}
-
-body[data-theme="dark"] .theme-switcher label {
-  color: var(--text-light);
-}
-
-body[data-theme="dark"] .transaction-table tr:hover {
-  background: #374151;
 }

@@ -1,174 +1,135 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="EduScheme - Generate Kenyan teaching schemes of work efficiently." />
-  <title>EduScheme | Smart Scheme Generator</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduScheme | Smart Teaching Planner</title>
+  <link rel="stylesheet" href="Css/style.css" />
 </head>
 <body>
   <div class="app-container">
-    <aside class="sidebar">
-      <h2 class="logo">EduScheme</h2>
-      <nav>
-        <ul>
-          <li data-panel="dashboard" class="active">Dashboard</li>
-          <li data-panel="wallet">Wallet</li>
-          <li data-panel="create">Create Scheme</li>
-          <li data-panel="settings">Settings</li>
-        </ul>
-      </nav>
+    <nav class="sidebar">
+      <h2>EduScheme</h2>
+      <ul>
+        <li onclick="switchPanel('dashboard')">📊 Dashboard</li>
+        <li onclick="switchPanel('wallet')">💰 Wallet</li>
+        <li onclick="switchPanel('create-scheme')">📝 Create Scheme</li>
+        <li onclick="switchPanel('lesson-plans')">📚 Lesson Plans</li>
+        <li onclick="switchPanel('content-tools')">📂 Teaching Tools</li>
+        <li onclick="switchPanel('settings')">⚙️ Settings</li>
+      </ul>
       <div class="theme-switcher">
-        <label for="theme-select">Theme:</label>
+        <label for="theme-select">🌗 Theme</label>
         <select id="theme-select">
-          <option value="light">🌞 Light</option>
-          <option value="dark">🌚 Dark</option>
-          <option value="system">🖥 System</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="system">System</option>
         </select>
       </div>
-    </aside>
+    </nav>
 
-    <main class="main-panel">
-      <!-- Dashboard Panel -->
+    <main class="main-content">
+      <!-- Dashboard -->
       <section id="dashboard" class="panel active">
-        <h1>Hello 👋, <span id="user-name">Teacher</span></h1>
+        <h2>Hello 👋, Teacher</h2>
         <div class="card-grid">
-          <div class="card">
-            <h3>Available Balance</h3>
-            <p>KES <span id="balance">0</span></p>
-            <button class="action-btn">Top Up</button>
-          </div>
-          <div class="card">
-            <h3>Export</h3>
-            <button class="action-btn" id="export-btn">Export to PDF</button>
-          </div>
-          <div class="card">
-            <h3>Schemes Generated</h3>
-            <p><span id="scheme-count">0</span></p>
-          </div>
-          <div class="card">
-            <h3>Recently Generated</h3>
-            <p><span id="recent-scheme">None</span></p>
-          </div>
+          <div class="card">Balance: KES <span id="balance">0</span> <button>Top Up</button></div>
+          <div class="card"><button id="export-btn">Export to PDF</button></div>
+          <div class="card">Schemes Generated: <span id="scheme-count">0</span></div>
+          <div class="card">Recently Generated Scheme: <span id="recent-scheme">None</span></div>
         </div>
       </section>
 
-      <!-- Wallet Panel -->
+      <!-- Wallet -->
       <section id="wallet" class="panel">
         <h2>Wallet</h2>
-        <div class="wallet-summary">
-          <p>Total Balance: <strong>KES <span id="wallet-balance">0</span></strong></p>
-          <p>Total Transactions: <strong><span id="transaction-count">0</span></strong></p>
-        </div>
+        <div>Total Balance: KES <strong>0</strong></div>
+        <div>Total Transactions: <strong>0</strong></div>
         <table class="transaction-table">
           <thead>
-            <tr>
-              <th>Tracking ID</th>
-              <th>Amount</th>
-              <th>Date</th>
-              <th>Time</th>
-            </tr>
+            <tr><th>Tracking ID</th><th>Amount</th><th>Date</th><th>Time</th></tr>
           </thead>
-          <tbody id="transaction-body">
-            <!-- JS will populate rows -->
-          </tbody>
+          <tbody></tbody>
         </table>
       </section>
 
-      <!-- Create Scheme Panel -->
-      <section id="create" class="panel">
+      <!-- Create Scheme -->
+      <section id="create-scheme" class="panel">
         <h2>Create Scheme</h2>
-        <form id="scheme-form">
-          <div class="form-group">
-            <label for="school-name">School Name</label>
-            <input type="text" id="school-name" name="schoolName" required />
-          </div>
-
-          <div class="form-group">
-            <label for="school-level">School Level</label>
-            <select id="school-level" name="schoolLevel" required>
-              <option value="">Select</option>
+        <form id="scheme-form" class="scheme-form">
+          <div class="form-group"><label for="school-name">School Name</label><input type="text" id="school-name" required></div>
+          <div class="form-group"><label for="school-level">School Level</label>
+            <select id="school-level" required>
+              <option value="">Select level</option>
               <option value="primary">Primary</option>
               <option value="secondary">Secondary</option>
             </select>
           </div>
-
-          <div class="form-group" id="level-options" style="display: none;"></div>
-
-          <div class="form-group">
-            <label for="year">Academic Year</label>
-            <select id="year" name="year" required></select>
-          </div>
-
-          <div class="form-group">
-            <label for="term">Term</label>
-            <select id="term" name="term" required>
-              <option value="term1">Term 1 (Jan - Apr)</option>
-              <option value="term2">Term 2 (May - Jul)</option>
-              <option value="term3">Term 3 (Sep - Nov)</option>
+          <div id="level-container" class="form-group"></div>
+          <div class="form-group"><label for="year">Year</label><select id="year"></select></div>
+          <div class="form-group"><label for="term">Term</label>
+            <select id="term">
+              <option value="1">Term 1 (Jan–Apr)</option>
+              <option value="2">Term 2 (May–Jul)</option>
+              <option value="3">Term 3 (Sep–Nov)</option>
             </select>
           </div>
-
-          <div class="form-group">
-            <label for="subject">Subject</label>
-            <select id="subject" name="subject" required>
-              <option value="">Select</option>
-              <option value="chemistry">Chemistry</option>
-              <option value="biology">Biology</option>
-              <option value="physics">Physics</option>
-              <option value="history">History</option>
-              <option value="geography">Geography</option>
-              <option value="cre">C.R.E</option>
-              <option value="ire">I.R.E</option>
-              <option value="french">French</option>
-              <option value="home-science">Home Science</option>
-              <option value="computer">Computer</option>
-              <option value="agriculture">Agriculture</option>
+          <div class="form-group"><label for="subject">Subject</label>
+            <select id="subject">
+              <option value="">Select Subject</option>
+              <option>Chemistry</option><option>Biology</option><option>Physics</option>
+              <option>History</option><option>Geography</option><option>CRE</option><option>IRE</option>
+              <option>French</option><option>Home Science</option><option>Computer</option><option>Agriculture</option>
             </select>
           </div>
-
-          <div class="form-actions">
+          <div class="settings-actions">
             <button type="submit" class="action-btn">Save and Continue</button>
-            <button type="button" class="action-btn" onclick="document.querySelector('[data-panel=dashboard]').click()">Back to Dashboard</button>
+            <button type="button" class="action-btn" onclick="switchPanel('dashboard')">Back</button>
           </div>
         </form>
       </section>
 
-      <!-- Settings Panel -->
-    <section id="settings" class="panel">
-    <h2>Settings</h2>
-    <form id="settings-form" class="settings-form">
-        <div class="form-group">
-        <label for="user-name-input">Name</label>
-        <input type="text" id="user-name-input" name="name" placeholder="Enter your name" required />
-        </div>
+      <!-- Lesson Plans -->
+      <section id="lesson-plans" class="panel">
+        <h2>Lesson Plans</h2>
+        <form id="lesson-plan-form">
+          <div class="form-group"><label for="lp-subject">Subject</label>
+            <select id="lp-subject"><option>Chemistry</option><option>Biology</option></select>
+          </div>
+          <div class="form-group"><label for="lp-topic">Topic</label><input type="text" id="lp-topic" /></div>
+          <div class="form-group"><label for="lp-objective">Objective</label><textarea id="lp-objective" rows="3"></textarea></div>
+          <button type="submit" class="action-btn">Save Lesson Plan</button>
+        </form>
+      </section>
 
-        <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required />
-        </div>
+      <!-- Content Tools -->
+      <section id="content-tools" class="panel">
+        <h2>Teaching Tools</h2>
+        <ul class="tools-list">
+          <li><button class="action-btn">Generate Notes from eBooks</button></li>
+          <li><button class="action-btn">Create Slides</button></li>
+          <li><button class="action-btn">Build Lesson Plans</button></li>
+          <li><button class="action-btn">Generate Exams</button></li>
+        </ul>
+        <p class="note">Later, these will connect to pre-done resources and AI-driven content.</p>
+      </section>
 
-        <div class="form-group">
-        <label for="role">Role</label>
-        <input type="text" id="role" name="role" placeholder="e.g., Teacher" />
-        </div>
-
-        <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Update password" />
-        </div>
-
-        <div class="settings-actions">
-        <button type="submit" class="action-btn">Save Settings</button>
-        <button type="button" class="action-btn" onclick="handleLogout()">Log Out</button>
-        </div>
-    </form>
-    </section>
-
+      <!-- Settings -->
+      <section id="settings" class="panel">
+        <h2>Settings</h2>
+        <form id="settings-form" class="settings-form">
+          <div class="form-group"><label for="user-name-input">Name</label><input type="text" id="user-name-input" required /></div>
+          <div class="form-group"><label for="email">Email</label><input type="email" id="email" required /></div>
+          <div class="form-group"><label for="role">Role</label><input type="text" id="role" /></div>
+          <div class="form-group"><label for="password">Password</label><input type="password" id="password" /></div>
+          <div class="settings-actions">
+            <button type="submit" class="action-btn">Save Settings</button>
+            <button type="button" class="action-btn" onclick="handleLogout()">Log Out</button>
+          </div>
+        </form>
+      </section>
     </main>
   </div>
-
   <script src="js/main.js"></script>
 </body>
 </html>
