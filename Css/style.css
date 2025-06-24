@@ -1,16 +1,110 @@
-/* eduscheme/css/style.css */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 1rem;
-  background-color: #f9f9f9;
-  color: #333;
+/* style.css */
+
+:root {
+  --color-blue: #2563eb;
+  --color-green: #10b981;
+  --color-grey: #6b7280;
+  --color-white: #ffffff;
+  --bg-light: #f9fafb;
+  --bg-dark: #1f2937;
+  --text-dark: #111827;
+  --text-light: #f9fafb;
 }
 
-header {
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+}
+
+body[data-theme="dark"] {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+}
+
+.app-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 240px;
+  background: var(--color-blue);
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar nav li {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.sidebar nav li:hover,
+.sidebar nav li.active {
+  background: var(--color-green);
+}
+
+.theme-switcher {
+  margin-top: auto;
+  padding-top: 2rem;
+  color: var(--color-white);
+}
+
+.theme-switcher label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.main-panel {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  background: var(--bg-light);
+  transition: background 0.3s;
+}
+
+body[data-theme="dark"] .main-panel {
+  background: var(--bg-dark);
+}
+
+.panel {
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.panel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .card-grid {
@@ -21,8 +115,61 @@ header {
 }
 
 .card {
-  background: #fff;
+  background: var(--color-white);
   padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.action-btn {
+  background: var(--color-green);
+  border: none;
+  padding: 0.5rem 1rem;
+  color: var(--color-white);
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.action-btn:hover {
+  background: #059669;
+}
+
+.wallet-summary {
+  margin-bottom: 1rem;
+}
+
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.transaction-table th,
+.transaction-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.transaction-table th {
+  background: var(--color-grey);
+  color: var(--color-white);
+}
+
+.transaction-table tr:hover {
+  background: #f3f4f6;
+}
+
+body[data-theme="dark"] .transaction-table tr:hover {
+  background: #374151;
 }

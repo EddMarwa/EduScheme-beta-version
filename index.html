@@ -1,36 +1,94 @@
-<!-- eduscheme/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="EduScheme - Generate Kenyan teaching schemes of work efficiently.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EduScheme - Generate Kenyan teaching schemes of work efficiently." />
   <title>EduScheme | Smart Scheme Generator</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header>
-    <h1>Hello 👋, <span id="user-name">Teacher</span></h1>
-    <div class="theme-switcher">
-      <select id="theme-select">
-        <option value="light">🌞 Light</option>
-        <option value="dark">🌚 Dark</option>
-        <option value="system">🖥 System</option>
-      </select>
-    </div>
-  </header>
-
-  <main>
-    <section id="dashboard">
-      <h2>Dashboard</h2>
-      <div class="card-grid">
-        <div class="card">Balance: KES <span id="balance">0</span> <button>Top Up</button></div>
-        <div class="card"><button id="export-btn">Export to PDF</button></div>
-        <div class="card">Schemes Generated: <span id="scheme-count">0</span></div>
-        <div class="card">Recently Generated Scheme: <span id="recent-scheme">None</span></div>
+  <div class="app-container">
+    <aside class="sidebar">
+      <h2 class="logo">EduScheme</h2>
+      <nav>
+        <ul>
+          <li data-panel="dashboard" class="active">Dashboard</li>
+          <li data-panel="wallet">Wallet</li>
+          <li data-panel="create">Create Scheme</li>
+          <li data-panel="settings">Settings</li>
+        </ul>
+      </nav>
+      <div class="theme-switcher">
+        <label for="theme-select">Theme:</label>
+        <select id="theme-select">
+          <option value="light">🌞 Light</option>
+          <option value="dark">🌚 Dark</option>
+          <option value="system">🖥 System</option>
+        </select>
       </div>
-    </section>
-  </main>
+    </aside>
+
+    <main class="main-panel">
+      <!-- Dashboard Panel -->
+      <section id="dashboard" class="panel active">
+        <h1>Hello 👋, <span id="user-name">Teacher</span></h1>
+        <div class="card-grid">
+          <div class="card">
+            <h3>Available Balance</h3>
+            <p>KES <span id="balance">0</span></p>
+            <button class="action-btn">Top Up</button>
+          </div>
+          <div class="card">
+            <h3>Export</h3>
+            <button class="action-btn" id="export-btn">Export to PDF</button>
+          </div>
+          <div class="card">
+            <h3>Schemes Generated</h3>
+            <p><span id="scheme-count">0</span></p>
+          </div>
+          <div class="card">
+            <h3>Recently Generated</h3>
+            <p><span id="recent-scheme">None</span></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Wallet Panel -->
+      <section id="wallet" class="panel">
+        <h2>Wallet</h2>
+        <div class="wallet-summary">
+          <p>Total Balance: <strong>KES <span id="wallet-balance">0</span></strong></p>
+          <p>Total Transactions: <strong><span id="transaction-count">0</span></strong></p>
+        </div>
+        <table class="transaction-table">
+          <thead>
+            <tr>
+              <th>Tracking ID</th>
+              <th>Amount</th>
+              <th>Date</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody id="transaction-body">
+            <!-- JS will populate rows -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Create Scheme Panel Placeholder -->
+      <section id="create" class="panel">
+        <h2>Create Scheme</h2>
+        <p>Coming soon...</p>
+      </section>
+
+      <!-- Settings Panel Placeholder -->
+      <section id="settings" class="panel">
+        <h2>Settings</h2>
+        <p>Coming soon...</p>
+      </section>
+    </main>
+  </div>
 
   <script src="js/main.js"></script>
 </body>
