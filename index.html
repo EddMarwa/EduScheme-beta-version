@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>EduScheme | Smart Teaching Planner</title>
   <link rel="stylesheet" href="Css/style.css" />
 </head>
-
 <body>
-  <div class="app-container">
+  <div class="app-container fade-in">
     <nav class="sidebar">
-      <h2>EduScheme</h2>
-      <ul>
-        <li onclick="switchPanel('dashboard')">📊 Dashboard</li>
-        <li onclick="switchPanel('wallet')">💰 Wallet</li>
-        <li onclick="switchPanel('create-scheme')">📝 Create Scheme</li>
-        <li onclick="switchPanel('lesson-plans')">📚 Lesson Plans</li>
-        <li onclick="switchPanel('content-tools')">📂 Teaching Tools</li>
-        <li onclick="switchPanel('settings')">⚙️ Settings</li>
+      <h2 class="logo bounce-in">EduScheme</h2>
+      <ul class="nav-links">
+        <li onclick="switchPanel('dashboard')" class="nav-item">📊 Dashboard</li>
+        <li onclick="switchPanel('wallet')" class="nav-item">💰 Wallet</li>
+        <li onclick="switchPanel('create-scheme')" class="nav-item">📝 Create Scheme</li>
+        <li onclick="switchPanel('lesson-plans')" class="nav-item">📚 Lesson Plans</li>
+        <li onclick="switchPanel('content-tools')" class="nav-item">📂 Teaching Tools</li>
+        <li onclick="switchPanel('settings')" class="nav-item">⚙️ Settings</li>
       </ul>
       <div class="theme-switcher">
         <label for="theme-select">🌗 Theme</label>
@@ -30,37 +29,56 @@
     </nav>
 
     <main class="main-content">
-
       <!-- Dashboard -->
-      <section id="dashboard" class="panel active">
+      <section id="dashboard" class="panel active animated-panel">
         <h2>Hello 👋, Teacher</h2>
         <div class="card-grid">
-          <div class="card">Balance: KES <span id="balance">0</span> <button>Top Up</button></div>
-          <div class="card"><button id="export-btn">Export to PDF</button></div>
-          <div class="card">Schemes Generated: <span id="scheme-count">0</span></div>
-          <div class="card">Recently Generated Scheme: <span id="recent-scheme">None</span></div>
+          <div class="card bounce-hover">
+            Balance: KES <span id="balance">0</span>
+            <button class="action-btn">Top Up</button>
+          </div>
+          <div class="card bounce-hover">
+            <button class="action-btn" id="export-btn">Export to PDF</button>
+          </div>
+          <div class="card bounce-hover">
+            Schemes Generated: <span id="scheme-count">0</span>
+          </div>
+          <div class="card bounce-hover">
+            Recently Generated Scheme: <span id="recent-scheme">None</span>
+          </div>
         </div>
       </section>
 
       <!-- Wallet -->
-      <section id="wallet" class="panel">
+      <section id="wallet" class="panel animated-panel">
         <h2>Wallet</h2>
-        <div>Total Balance: KES <strong>0</strong></div>
-        <div>Total Transactions: <strong>0</strong></div>
+        <p>Total Balance: <strong>KES 0</strong></p>
+        <p>Total Transactions: <strong>0</strong></p>
         <table class="transaction-table">
           <thead>
-            <tr><th>Tracking ID</th><th>Amount</th><th>Date</th><th>Time</th></tr>
+            <tr>
+              <th>Tracking ID</th>
+              <th>Amount</th>
+              <th>Date</th>
+              <th>Time</th>
+            </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            <!-- Transactions go here -->
+          </tbody>
         </table>
       </section>
 
       <!-- Create Scheme -->
-      <section id="create-scheme" class="panel">
+      <section id="create-scheme" class="panel animated-panel">
         <h2>Create Scheme</h2>
         <form id="scheme-form" class="scheme-form">
-          <div class="form-group"><label for="school-name">School Name</label><input type="text" id="school-name" required></div>
-          <div class="form-group"><label for="school-level">School Level</label>
+          <div class="form-group">
+            <label for="school-name">School Name</label>
+            <input type="text" id="school-name" required>
+          </div>
+          <div class="form-group">
+            <label for="school-level">School Level</label>
             <select id="school-level" required>
               <option value="">Select level</option>
               <option value="primary">Primary</option>
@@ -68,20 +86,33 @@
             </select>
           </div>
           <div id="level-container" class="form-group"></div>
-          <div class="form-group"><label for="year">Year</label><select id="year"></select></div>
-          <div class="form-group"><label for="term">Term</label>
+          <div class="form-group">
+            <label for="year">Year</label>
+            <select id="year"></select>
+          </div>
+          <div class="form-group">
+            <label for="term">Term</label>
             <select id="term">
               <option value="1">Term 1 (Jan–Apr)</option>
               <option value="2">Term 2 (May–Jul)</option>
               <option value="3">Term 3 (Sep–Nov)</option>
             </select>
           </div>
-          <div class="form-group"><label for="subject">Subject</label>
+          <div class="form-group">
+            <label for="subject">Subject</label>
             <select id="subject">
               <option value="">Select Subject</option>
-              <option>Chemistry</option><option>Biology</option><option>Physics</option>
-              <option>History</option><option>Geography</option><option>CRE</option><option>IRE</option>
-              <option>French</option><option>Home Science</option><option>Computer</option><option>Agriculture</option>
+              <option>Chemistry</option>
+              <option>Biology</option>
+              <option>Physics</option>
+              <option>History</option>
+              <option>Geography</option>
+              <option>CRE</option>
+              <option>IRE</option>
+              <option>French</option>
+              <option>Home Science</option>
+              <option>Computer</option>
+              <option>Agriculture</option>
             </select>
           </div>
           <div class="settings-actions">
@@ -92,43 +123,21 @@
       </section>
 
       <!-- Lesson Plans -->
-      <section id="lesson-plans" class="panel">
+      <section id="lesson-plans" class="panel animated-panel">
         <h2>Lesson Plans</h2>
-        <form id="lesson-plan-form">
-          <div class="form-group"><label for="lp-subject">Subject</label>
-            <select id="lp-subject"><option>Chemistry</option><option>Biology</option></select>
-          </div>
-          <div class="form-group"><label for="lp-topic">Topic</label><input type="text" id="lp-topic" /></div>
-          <div class="form-group"><label for="lp-objective">Objective</label><textarea id="lp-objective" rows="3"></textarea></div>
-          <button type="submit" class="action-btn">Save Lesson Plan</button>
-        </form>
+        <p>Coming soon...</p>
       </section>
 
       <!-- Content Tools -->
-      <section id="content-tools" class="panel">
+      <section id="content-tools" class="panel animated-panel">
         <h2>Teaching Tools</h2>
-        <ul class="tools-list">
-          <li><button class="action-btn">Generate Notes from eBooks</button></li>
-          <li><button class="action-btn">Create Slides</button></li>
-          <li><button class="action-btn">Build Lesson Plans</button></li>
-          <li><button class="action-btn">Generate Exams</button></li>
-        </ul>
-        <p class="note">Later, these will connect to pre-done resources and AI-driven content.</p>
+        <p>Coming soon...</p>
       </section>
 
       <!-- Settings -->
-      <section id="settings" class="panel">
+      <section id="settings" class="panel animated-panel">
         <h2>Settings</h2>
-        <form id="settings-form" class="settings-form">
-          <div class="form-group"><label for="user-name-input">Name</label><input type="text" id="user-name-input" required /></div>
-          <div class="form-group"><label for="email">Email</label><input type="email" id="email" required /></div>
-          <div class="form-group"><label for="role">Role</label><input type="text" id="role" /></div>
-          <div class="form-group"><label for="password">Password</label><input type="password" id="password" /></div>
-          <div class="settings-actions">
-            <button type="submit" class="action-btn">Save Settings</button>
-            <button type="button" class="action-btn" onclick="handleLogout()">Log Out</button>
-          </div>
-        </form>
+        <p>Coming soon...</p>
       </section>
     </main>
   </div>
