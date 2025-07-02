@@ -80,3 +80,30 @@ function exportSchemeToExcel() {
 
   XLSX.writeFile(workbook, `${schoolName || "scheme"}_${subject}_term${term}.xlsx`);
 }
+// Preview Scheme
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("scheme-form");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault(); // stop form reload
+
+    const schoolName = document.getElementById("school-name").value;
+    const level = document.getElementById("school-level").value;
+    const classOrForm = document.getElementById("class-or-form")?.value || '';
+    const year = document.getElementById("year").value;
+    const term = document.getElementById("term").value;
+    const subject = document.getElementById("subject").value;
+
+    const previewHTML = `
+      <p><strong>School:</strong> ${schoolName}</p>
+      <p><strong>Level:</strong> ${level}</p>
+      <p><strong>Class/Form:</strong> ${classOrForm}</p>
+      <p><strong>Year:</strong> ${year}</p>
+      <p><strong>Term:</strong> ${term}</p>
+      <p><strong>Subject:</strong> ${subject}</p>
+    `;
+
+    document.getElementById("preview-content").innerHTML = previewHTML;
+  });
+});
+
