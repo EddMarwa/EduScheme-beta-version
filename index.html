@@ -130,9 +130,48 @@
 
       <!-- Lesson Plans -->
       <section id="lesson-plans" class="panel animated-panel">
-        <h2>Lesson Plans</h2>
-        <p>Coming soon...</p>
-      </section>
+  <h2>Generate Lesson Plan</h2>
+  <form id="lesson-plan-form" class="scheme-form">
+    <div class="form-group">
+      <label for="lp-subject">Subject</label>
+      <select id="lp-subject" required>
+        <option>Chemistry</option>
+        <option>Biology</option>
+        <option>Physics</option>
+        <option>Mathematics</option>
+        <option>History</option>
+        <option>Geography</option>
+        <option>English</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="lp-topic">Topic</label>
+      <input type="text" id="lp-topic" placeholder="e.g. Acids and Bases" required />
+    </div>
+
+    <div class="form-group">
+      <label for="lp-objectives">Lesson Objectives</label>
+      <textarea id="lp-objectives" placeholder="e.g. By the end of the lesson..." rows="3" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="lp-activities">Teaching Activities</label>
+      <textarea id="lp-activities" placeholder="e.g. Discussion, demonstration..." rows="3" required></textarea>
+    </div>
+
+    <div class="settings-actions">
+      <button type="submit" class="action-btn">Generate Plan</button>
+    </div>
+  </form>
+
+  <div class="scheme-preview">
+    <h3>Lesson Plan Preview</h3>
+    <div id="lp-preview-content"></div>
+    <button class="action-btn" onclick="exportLessonPlanToExcel()">Export to Excel</button>
+  </div>
+</section>
+
 
       <!-- Content Tools -->
       <section id="content-tools" class="panel animated-panel">
