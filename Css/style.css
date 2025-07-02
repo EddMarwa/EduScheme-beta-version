@@ -225,3 +225,41 @@ body[data-theme="dark"] .scheme-preview {
   margin-bottom: 1rem;
   color: var(--text-dark);
 }
+.card h4 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  resize: vertical;
+}
+
+body[data-theme="dark"] textarea {
+  background-color: #1f2937;
+  color: #f3f4f6;
+  border-color: #4b5563;
+}
+@media (max-width: 600px) {
+  .sidebar {
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+    height: auto;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+  }
+
+  .main-content {
+    margin-top: 60px; /* Adjust for fixed sidebar */
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -192,3 +192,40 @@ document.getElementById("scheme-form").addEventListener("reset", function () {
   localStorage.removeItem("eduscheme_draft"); // Clear saved data
   alert("✅ Form reset successfully.");
 });
+// LESSON PLAN FORM: preview and export
+document.getElementById("lesson-plan-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const subject = document.getElementById("lp-subject").value;
+  const topic = document.getElementById("lp-topic").value;
+  const objectives = document.getElementById("lp-objectives").value;
+  const activities = document.getElementById("lp-activities").value;
+
+  const preview = `
+    <p><strong>Subject:</strong> ${subject}</p>
+    <p><strong>Topic:</strong> ${topic}</p>
+    <p><strong>Objectives:</strong><br>${objectives.replace(/\n/g, "<br>")}</p>
+    <p><strong>Activities:</strong><br>${activities.replace(/\n/g, "<br>")}</p>
+  `;
+  document.getElementById("lp-preview-content").innerHTML = preview;
+});
+
+// Export Lesson Plan to Excel
+function exportLessonPlanToExcel() {
+  const subject = document.getElementById("lp-subject").value;
+  const topic = document.getElementById("lp-topic").value;
+  const objectives = document.getElementById("lp-objectives").value;
+  const activities = document.getElementById("lp-activities").value;
+
+  const data = [
+    ["Subject", "Topic", "Objectives", "Activities"],
+    [subject, topic, objectives, activities]
+  ];
+
+  const ws = XLSX.utils.aoa_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Lesson Plan");
+
+  XLSX.writeFile(wb, `${subject}_Lesson_Plan.xlsx`);
+}
+
