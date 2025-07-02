@@ -58,3 +58,25 @@ document.getElementById("scheme-form").addEventListener("submit", function (e) {
   e.preventDefault();
   alert("✅ Scheme saved!");
 });
+
+// Export Scheme to Excel
+// This function collects the form data and exports it to an Excel file.
+function exportSchemeToExcel() {
+  const schoolName = document.getElementById("school-name").value;
+  const level = document.getElementById("school-level").value;
+  const classOrForm = document.getElementById("class-or-form")?.value || '';
+  const year = document.getElementById("year").value;
+  const term = document.getElementById("term").value;
+  const subject = document.getElementById("subject").value;
+
+  const data = [
+    ["School Name", "Level", "Class/Form", "Year", "Term", "Subject"],
+    [schoolName, level, classOrForm, year, term, subject]
+  ];
+
+  const worksheet = XLSX.utils.aoa_to_sheet(data);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Scheme of Work");
+
+  XLSX.writeFile(workbook, `${schoolName || "scheme"}_${subject}_term${term}.xlsx`);
+}
