@@ -106,4 +106,89 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("preview-content").innerHTML = previewHTML;
   });
 });
+// EduScheme - Auto Save Form Data
+// This script automatically saves form data to localStorage and restores it on page load.
+// LocalStorage Key
+const FORM_STORAGE_KEY = "eduscheme_draft";
 
+// Save inputs automatically on change
+function autoSaveForm() {
+  const formData = {
+    schoolName: document.getElementById("school-name").value,
+    level: document.getElementById("school-level").value,
+    classOrForm: document.getElementById("class-or-form")?.value || '',
+    year: document.getElementById("year").value,
+    term: document.getElementById("term").value,
+    subject: document.getElementById("subject").value
+  };
+
+  localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(formData));
+}
+
+// Load and fill form on page load
+function restoreFormData() {
+  const saved = JSON.parse(localStorage.getItem(FORM_STORAGE_KEY));
+  if (!saved) return;
+
+  document.getElementById("school-name").value = saved.schoolName || "";
+  document.getElementById("school-level").value = saved.level || "";
+
+  // Trigger the form selector to populate class/form
+  if (saved.level) {
+    document.getElementById("school-level").dispatchEvent(new Event("change"));
+    setTimeout(() => {
+      const select = document.getElementById("class-or-form");
+      if (select) select.value = saved.classOrForm;
+    }, 100); // wait for form options to load
+  }
+
+  document.getElementById("year").value = saved.year || "";
+  document.getElementById("term").value = saved.term || "";
+  document.getElementById("subject").value = saved.subject || "";
+}
+
+// Listen to all inputs for autosave
+function initAutoSaveListeners() {
+  const inputs = [
+    "school-name",
+    "school-level",
+    "year",
+    "term",
+    "subject"
+  ];
+
+  inputs.forEach(id => {
+    document.getElementById(id).addEventListener("change", autoSaveForm);
+  });
+
+  document.addEventListener("change", () => {
+    const select = document.getElementById("class-or-form");
+    if (select) {
+      select.addEventListener("change", autoSaveForm);
+    }
+  });
+}
+
+// Initialize on page load
+document.addEventListener("DOMContentLoaded", () => {
+  restoreFormData();
+  initAutoSaveListeners();
+});
+// Reset Scheme Form
+// This function clears the form and localStorage, prompting the user for confirmation.
+function resetSchemeForm() {
+  if (confirm("Are you sure you want to clear the saved form data?")) {
+    localStorage.removeItem("eduscheme_draft");
+    document.getElementById("scheme-form").reset();
+    document.getElementById("preview-content").innerHTML = "";
+    document.getElementById("level-container").innerHTML = "";
+    alert("✅ Form reset successfully.");
+  }
+}
+// Reset the form and preview
+document.getElementById("scheme-form").addEventListener("reset", function () { 
+  document.getElementById("preview-content").innerHTML = "";
+  document.getElementById("level-container").innerHTML = "";
+  localStorage.removeItem("eduscheme_draft"); // Clear saved data
+  alert("✅ Form reset successfully.");
+});
