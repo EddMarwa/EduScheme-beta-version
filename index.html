@@ -30,24 +30,40 @@
 
     <main class="main-content">
       <!-- Dashboard -->
-      <section id="dashboard" class="panel active animated-panel">
-        <h2>Hello 👋, Teacher</h2>
-        <div class="card-grid">
-          <div class="card bounce-hover">
-            Balance: KES <span id="balance">0</span>
-            <button class="action-btn">Top Up</button>
-          </div>
-          <div class="card bounce-hover">
-            <button class="action-btn" id="export-btn">Export to PDF</button>
-          </div>
-          <div class="card bounce-hover">
-            Schemes Generated: <span id="scheme-count">0</span>
-          </div>
-          <div class="card bounce-hover">
-            Recently Generated Scheme: <span id="recent-scheme">None</span>
-          </div>
-        </div>
-      </section>
+      <section id="dashboard" class="panel animated-panel">
+  <h2>👋 Hello, <span id="user-greeting">Teacher</span></h2>
+
+  <div class="dashboard-grid">
+    <!-- Balance Card -->
+    <div class="card bounce-hover">
+      <h4>💰 Wallet Balance</h4>
+      <p><span class="stat-highlight">KES <span id="dash-balance">0.00</span></span></p>
+      <button class="action-btn" onclick="navigateTo('wallet')">Top Up</button>
+    </div>
+
+    <!-- Export Tool -->
+    <div class="card fade-in-hover">
+      <h4>📤 Export Tools</h4>
+      <p>Convert lesson plans & schemes into Excel or PDF.</p>
+      <button class="action-btn" onclick="navigateTo('create-scheme')">Export</button>
+    </div>
+
+    <!-- Schemes Count -->
+    <div class="card slide-up-hover">
+      <h4>📚 Schemes Created</h4>
+      <p class="stat-highlight"><span id="schemes-count">5</span> total</p>
+      <button class="action-btn" onclick="navigateTo('create-scheme')">Create New</button>
+    </div>
+
+    <!-- Recently Generated -->
+    <div class="card zoom-hover">
+      <h4>🕒 Recent Scheme</h4>
+      <p><span id="recent-scheme">Form 2 - Biology (Term 2)</span></p>
+      <button class="action-btn" onclick="navigateTo('create-scheme')">View All</button>
+    </div>
+  </div>
+</section>
+
 
       <!-- Wallet -->
       <section id="wallet" class="panel animated-panel">
@@ -174,41 +190,90 @@
 
 
       <!-- Content Tools -->
-      <section id="content-tools" class="panel animated-panel">
-  <h2>Teaching Tools</h2>
-  <div class="card-grid">
-    <div class="card bounce-hover">
-      <h4>📖 Generate Notes</h4>
-      <p>Create topic-based lesson notes instantly.</p>
-      <button class="action-btn" onclick="alert('Coming soon!')">Open Tool</button>
+     <section id="content-tools" class="panel animated-panel">
+  <h2>AI Teaching Tools</h2>
+
+  <form id="ai-tool-form" class="scheme-form">
+    <div class="form-group">
+      <label for="tool-type">Select Tool</label>
+      <select id="tool-type" required>
+        <option value="">-- Choose a tool --</option>
+        <option value="notes">📝 Generate Notes</option>
+        <option value="slides">📊 Generate Slides</option>
+        <option value="exams">📝 Generate Exam Questions</option>
+        <option value="summary">🧠 Summarize Topic</option>
+      </select>
     </div>
 
-    <div class="card bounce-hover">
-      <h4>📊 Generate Slides</h4>
-      <p>Get slide outlines for any syllabus topic.</p>
-      <button class="action-btn" onclick="alert('Coming soon!')">Open Tool</button>
+    <div class="form-group">
+      <label for="tool-subject">Subject</label>
+      <select id="tool-subject" required>
+        <option>Chemistry</option>
+        <option>Biology</option>
+        <option>Physics</option>
+        <option>Mathematics</option>
+        <option>History</option>
+        <option>Geography</option>
+      </select>
     </div>
 
-    <div class="card bounce-hover">
-      <h4>📝 Exam Questions</h4>
-      <p>Auto-create sample exam questions per subject.</p>
-      <button class="action-btn" onclick="alert('Coming soon!')">Open Tool</button>
+    <div class="form-group">
+      <label for="tool-topic">Topic</label>
+      <input type="text" id="tool-topic" placeholder="e.g. Atomic Structure" required />
     </div>
 
-    <div class="card bounce-hover">
-      <h4>🧠 Topic Summarizer</h4>
-      <p>Summarize topics into bite-sized learning notes.</p>
-      <button class="action-btn" onclick="alert('Coming soon!')">Open Tool</button>
+    <div class="settings-actions">
+      <button type="submit" class="action-btn">🪄 Generate</button>
+    </div>
+  </form>
+
+  <div class="scheme-preview">
+    <h3>AI Content Output (Preview)</h3>
+    <div id="ai-preview-content">
+      <p style="color: grey;">No content generated yet...</p>
     </div>
   </div>
 </section>
 
 
+
       <!-- Settings -->
       <section id="settings" class="panel animated-panel">
-        <h2>Settings</h2>
-        <p>Coming soon...</p>
-      </section>
+  <h2>⚙️ Settings</h2>
+
+  <form id="settings-form" class="scheme-form">
+    <div class="form-group">
+      <label for="setting-name">Name</label>
+      <input type="text" id="setting-name" placeholder="Enter your name" required />
+    </div>
+
+    <div class="form-group">
+      <label for="setting-email">Email</label>
+      <input type="email" id="setting-email" placeholder="Enter your email" required />
+    </div>
+
+    <div class="form-group">
+      <label for="setting-role">Role</label>
+      <select id="setting-role" required>
+        <option>Teacher</option>
+        <option>Deputy</option>
+        <option>HOD</option>
+        <option>Admin</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="setting-password">Change Password</label>
+      <input type="password" id="setting-password" placeholder="New password (optional)" />
+    </div>
+
+    <div class="settings-actions">
+      <button type="submit" class="action-btn">💾 Save Changes</button>
+      <button type="button" class="action-btn" onclick="logoutUser()">🚪 Log Out</button>
+    </div>
+  </form>
+</section>
+
     </main>
   </div>
   <script src="js/main.js"></script>

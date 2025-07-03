@@ -53,6 +53,19 @@ document.getElementById("school-level").addEventListener("change", function () {
   container.appendChild(select);
 });
 
+// Demo: Populate dashboard values
+document.addEventListener("DOMContentLoaded", () => {
+  const user = JSON.parse(localStorage.getItem("eduscheme_user"));
+  if (user?.name) document.getElementById("user-greeting").innerText = user.name;
+
+  const demoBalance = localStorage.getItem("wallet_balance") || "254.00";
+  document.getElementById("dash-balance").innerText = demoBalance;
+
+  document.getElementById("schemes-count").innerText = "5";
+  document.getElementById("recent-scheme").innerText = "Form 2 - Biology (Term 2)";
+});
+
+
 // Dummy submit handler
 document.getElementById("scheme-form").addEventListener("submit", function (e) {
   e.preventDefault();
@@ -227,5 +240,68 @@ function exportLessonPlanToExcel() {
   XLSX.utils.book_append_sheet(wb, ws, "Lesson Plan");
 
   XLSX.writeFile(wb, `${subject}_Lesson_Plan.xlsx`);
+}
+
+// AI TOOL FORM: preview and mock response
+document.getElementById("ai-tool-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const type = document.getElementById("tool-type").value;
+  const subject = document.getElementById("tool-subject").value;
+  const topic = document.getElementById("tool-topic").value;
+
+  let mockResponse = "";
+
+  switch (type) {
+    case "notes":
+      mockResponse = `<h4>Generated Notes</h4><p><strong>Topic:</strong> ${topic}<br>Here are structured notes on ${topic} in ${subject}...</p>`;
+      break;
+    case "slides":
+      mockResponse = `<h4>Generated Slides Outline</h4><ul><li>Slide 1: Introduction to ${topic}</li><li>Slide 2: Key Concepts</li><li>Slide 3: Summary</li></ul>`;
+      break;
+    case "exams":
+      mockResponse = `<h4>Sample Exam Questions</h4><ol><li>Define ${topic}.</li><li>Explain its importance in ${subject}.</li></ol>`;
+      break;
+    case "summary":
+      mockResponse = `<h4>Topic Summary</h4><p><strong>${topic}</strong> is a fundamental concept in ${subject} that covers...</p>`;
+      break;
+    default:
+      mockResponse = `<p>No tool selected.</p>`;
+  }
+
+  document.getElementById("ai-preview-content").innerHTML = mockResponse;
+});
+
+document.getElementById("settings-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("setting-name").value;
+  const email = document.getElementById("setting-email").value;
+  const role = document.getElementById("setting-role").value;
+  const password = document.getElementById("setting-password").value;
+
+  // Save user data locally (for now)
+  const profile = { name, email, role };
+  localStorage.setItem("eduscheme_user", JSON.stringify(profile));
+
+  alert("✅ Profile updated successfully.");
+});
+
+// Load saved user data into the form
+document.addEventListener("DOMContentLoaded", () => {
+  const saved = JSON.parse(localStorage.getItem("eduscheme_user"));
+  if (saved) {
+    document.getElementById("setting-name").value = saved.name || "";
+    document.getElementById("setting-email").value = saved.email || "";
+    document.getElementById("setting-role").value = saved.role || "Teacher";
+  }
+});
+
+// Log out user
+function logoutUser() {
+  if (confirm("Are you sure you want to log out?")) {
+    localStorage.removeItem("eduscheme_user");
+    window.location.reload();
+  }
 }
 

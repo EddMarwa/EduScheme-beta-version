@@ -263,3 +263,90 @@ body[data-theme="dark"] textarea {
     flex-direction: column;
   }
 }
+/* AI Content */
+#ai-preview-content {
+  padding: 1rem;
+  background-color: var(--light-bg);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+#ai-preview-content h4 {
+  margin-bottom: 0.5rem;
+  color: var(--blue);
+}
+
+#ai-preview-content ul,
+#ai-preview-content ol {
+  margin: 0.5rem 0 1rem 1.2rem;
+}
+#ai-preview-content li {
+  margin-bottom: 0.5rem;
+}
+
+.settings-actions {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.settings-actions .action-btn {
+  flex: 1;
+}
+.settings-actions .action-btn:first-child {
+  background-color: var(--blue);
+}
+.settings-actions .action-btn:first-child:hover {
+  background-color: #2563eb;
+}
+.settings-actions .action-btn:last-child {
+  background-color: var(--green);
+}
+.settings-actions .action-btn:last-child:hover {
+  background-color: #059669;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.stat-highlight {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.card h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  margin-bottom: 0.75rem;
+}
+
+/* Hover Animations */
+.card.bounce-hover:hover {
+  transform: scale(1.04);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card.fade-in-hover:hover {
+  background-color: var(--blue);
+  color: white;
+  transition: 0.4s ease;
+}
+
+.card.slide-up-hover:hover {
+  transform: translateY(-5px);
+  transition: 0.3s ease;
+}
+
+.card.zoom-hover:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  transition: 0.3s ease;
+}
+
