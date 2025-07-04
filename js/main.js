@@ -242,8 +242,7 @@ function exportLessonPlanToExcel() {
   XLSX.writeFile(wb, `${subject}_Lesson_Plan.xlsx`);
 }
 
-
-// AI TOOL FORM: preview and mock response
+// AI TOOL FORM: preview & mock response
 document.getElementById("ai-tool-form").addEventListener("submit", function (e) {
   e.preventDefault();
 
