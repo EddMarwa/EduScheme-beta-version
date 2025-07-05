@@ -304,4 +304,3 @@ function logoutUser() {
     window.location.reload();
   }
 }
-
